@@ -22,9 +22,10 @@ jobs:
           docker compose up -d
 
       - name: Wait for app
-        run: |
-          # Wait for the app to pass its health check
-          sleep 3
+        run: sleep 5
+
+      - name: Logs from app container
+        run: docker compose logs mie-app
 
       - name: Test the app
         run: |
