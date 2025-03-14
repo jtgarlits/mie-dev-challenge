@@ -5,9 +5,17 @@
 - Added a **GitHub Action** (`.github/workflows/docker-ci.yml`) to build and spin up containers automatically for CI.  
 - Created a **Dockerfile** for the Node app, installing dependencies and exposing port 3000.  
 - Ensured `dotenv` is included in `package.json` and verified the database connection uses environment variables.  
-- Confirmed the app runs at `localhost:3000` and successfully connects to the DB in Docker.
+- Confirmed the app runs at [http://localhost:3000](http://localhost:3000) and successfully connects to the DB in Docker.
 
-**How to Start the App**
+**Dev Log – March 14**  
+- **Created the database schema** to include player tables, session expansions, min/max players, cooperative vs. competitive settings, and robust sample data.  
+- **Refined environment variable usage**, ensuring both Docker and local development pick up the same variables consistently.  
+- Cleaned up Docker files and folder structure to keep the Node.js app code and database schema neatly separated.  
+- Verified that you can run the Node.js app both locally and via Docker Compose without duplicating environment variables in multiple places.
+
+---
+
+## How to Start the App
 
 1. **Docker Compose (Recommended)**  
    - Clone this repository:  
@@ -20,7 +28,7 @@
      docker compose build
      docker compose up -d
      ```
-   - App will be on [http://localhost:3000](http://localhost:3000).  
+   - The app will be running at [http://localhost:3000](http://localhost:3000).
 
 2. **Local (No Docker)**  
    - Make sure you have Node.js installed.  
@@ -30,4 +38,18 @@
      npm install
      npm start
      ```
-   - By default, the app runs on [http://localhost:3000](http://localhost:3000).
+   - By default, the app runs at [http://localhost:3000](http://localhost:3000).
+
+---
+
+## How to Shut Down the App
+
+1. **If Running via Docker Compose**  
+   - In your project folder:
+     ```bash
+     docker compose down
+     ```
+   - This stops and removes the running containers. Your database data persists in the named volume `db_data`, unless you remove it with `docker compose down -v`.
+
+2. **If Running Locally (No Docker)**  
+   - In the terminal where `npm start` is running, press **Ctrl + C** (or **Cmd + C** on macOS) to stop the server.

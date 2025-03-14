@@ -1,12 +1,9 @@
 services:
   db:
-    image: mariadb:latest
+    build: ./db
     container_name: miedb
-    environment:
-      MARIADB_USER: app
-      MARIADB_PASSWORD: wonderful
-      MARIADB_DATABASE: miechallenge
-      MARIADB_ROOT_PASSWORD: wonderful
+    env_file:
+      - .env
     ports:
       - "3307:3306"
     volumes:
@@ -19,18 +16,15 @@ services:
       start_period: 30s
 
   app:
-    build: .
+    build: ./app
     container_name: mie-app
     depends_on:
       db:
         condition: service_healthy
+    env_file:
+      - .env
     ports:
       - "3000:3000"
-    environment:
-      DB_HOST: db
-      DB_USER: app
-      DB_PASSWORD: wonderful
-      DB_NAME: miechallenge
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:3000"]
       interval: 5s

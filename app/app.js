@@ -1,11 +1,11 @@
 // app.js
 // Main entry point for application
 
-require('dotenv').config(); // Load environment variables from .env file
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const express = require('express');
 const mysql = require('mysql');
-const path = require('path');
 const bodyParser= require('body-parser');
 const app = express();
 const { getHomePage} = require('./routes/index');
