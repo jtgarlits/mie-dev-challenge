@@ -20,7 +20,10 @@ jobs:
         run: |
           docker compose build
           docker compose up -d
-          sleep 30 # Wait for the services to be healthy
+          sleep 10 # Wait for the services to be healthy
+
+      - name: Logs from app container
+        run: docker compose logs app
 
       - name: Test the app
         run: |
