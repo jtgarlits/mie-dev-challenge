@@ -24,3 +24,4 @@ jobs:
 
       - name: Shut down
         run: docker compose down
+
