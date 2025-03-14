@@ -20,7 +20,15 @@ jobs:
         run: |
           docker compose build
           docker compose up -d
-          curl --fail http://localhost:3000 || exit 1
+
+      - name: Wait for app
+        run: |
+          # Wait for the app to pass its health check
+          sleep 3
+
+      - name: Test the app
+        run: |
+          curl --fail http://localhost:3000
 
       - name: Shut down
         run: docker compose down

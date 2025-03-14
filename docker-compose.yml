@@ -33,6 +33,12 @@ services:
       DB_NAME: miechallenge
     volumes:
       - .:/usr/src/app
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3000"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+      start_period: 5s
 
 volumes:
   db_data:
