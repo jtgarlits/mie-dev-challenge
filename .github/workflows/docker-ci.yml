@@ -20,9 +20,7 @@ jobs:
         run: |
           docker compose build
           docker compose up -d
-
-      - name: Wait for app
-        run: sleep 5
+          sleep 30 # Wait for the services to be healthy
 
       - name: Logs from app container
         run: docker compose logs mie-app
