@@ -35,6 +35,7 @@
    - Create a local database named `miechallenge` (e.g., via `mysql -e "CREATE DATABASE miechallenge"`).  
    - Install dependencies and start the server:  
      ```bash
+     cd app
      npm install
      npm start
      ```
