@@ -33,6 +33,7 @@ services:
       DB_NAME: miechallenge
     volumes:
       - .:/usr/src/app
+      - node_modules_volume:/usr/src/app/node_modules
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:3000"]
       interval: 5s
