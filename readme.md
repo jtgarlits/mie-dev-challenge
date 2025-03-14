@@ -12,7 +12,7 @@
 1. **Docker Compose (Recommended)**  
    - Clone this repository:  
      ```bash
-     git clone <https://github.com/jtgarlits/mie-dev-challenge> mie-dev-challenge
+     git clone https://github.com/jtgarlits/mie-dev-challenge mie-dev-challenge
      cd mie-dev-challenge
      ```
    - Build and run the containers:  
