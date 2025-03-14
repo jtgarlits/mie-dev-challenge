@@ -1,6 +1,8 @@
 // app.js
 // Main entry point for application
 
+require('dotenv').config(); // Load environment variables from .env file
+
 const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
@@ -10,15 +12,13 @@ const { getHomePage} = require('./routes/index');
 const game = require('./routes/game');
 const game_session = require('./routes/game_session');
 
-// TODO: application port should come from config file
-const port = 3000;
-
-// TODO: database connection parameters should come from config file
+const port = process.env.APP_PORT || 3000;
 const db = mysql.createConnection({
-	host: 'localhost',
-	user: 'app',
-	password: 'wonderful',
-	database: 'miechallenge'})
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
 
 db.connect((err) => {
 	if (err) {

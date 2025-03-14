@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: miedb
+    environment:
+      MARIADB_USER: app
+      MARIADB_PASSWORD: wonderful
+      MARIADB_DATABASE: miechallenge
+      MARIADB_ROOT_PASSWORD: wonderful
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h127.0.0.1", "-uroot", "-pwonderful"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  app:
+    build: .
+    container_name: mie-app
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: app
+      DB_PASSWORD: wonderful
+      DB_NAME: miechallenge
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  db_data:
